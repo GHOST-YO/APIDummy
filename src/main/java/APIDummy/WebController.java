@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,10 +17,15 @@ import java.util.Random;
  *
  */
 
+@CrossOrigin(maxAge = 3600)
 @Controller
 @EnableAutoConfiguration
 @ResponseBody
 public class WebController {
+
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**");
+    }
 
     @RequestMapping(value="/atropos/1.0/getLawEnforcementDetails/{phoneNumber}", produces = "application/json")
     @ResponseBody
@@ -49,7 +55,7 @@ public class WebController {
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
         response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me");
         response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Max-Age", "10000");
 
 
         RequestBundle requestBundle;
