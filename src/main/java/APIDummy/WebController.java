@@ -29,7 +29,7 @@ public class WebController {
 
     @RequestMapping(value="/atropos/1.0/getLawEnforcementDetails/{phoneNumber}", produces = "application/json")
     @ResponseBody
-    public List<ViewOneBundle> loadViewOne(@PathVariable int phoneNumber, HttpServletResponse response, HttpServletRequest request) {
+    public List<ViewOneBundle> loadViewOne(@PathVariable long phoneNumber, HttpServletResponse response, HttpServletRequest request) {
         ViewOne viewOne = new ViewOne();
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
@@ -37,17 +37,18 @@ public class WebController {
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Max-Age", "3600");
 
-        Random rand = new Random();
+        System.out.println("Request Number = " + phoneNumber);
 
-        int x = rand.nextInt(30) + 1;
-
-        for(int i = 0; i < x; i++)
-                viewOne.insertInList();
+        viewOne.insertInList(1451606400 ,1454198400);
+        viewOne.insertInList(1454284800 ,1456704000);
+        viewOne.insertInList(1456790400 ,1459382400);
+        viewOne.insertInList(1459468800 ,1461974400);
+        viewOne.insertInList(1462060800 ,1464652800);
 
         return viewOne.getViewOneData();
     }
 
-    @RequestMapping(value="/atropos/1.0/getMediaList/", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
+    /*@RequestMapping(value="/atropos/1.0/getMediaList/", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
     @ResponseBody
     public List<ViewTwoBundle> loadViewTwo(@RequestBody String json, HttpServletResponse response, HttpServletResponse request) throws IOException {
 
@@ -72,7 +73,7 @@ public class WebController {
             viewTwo.insertInList(requestBundle.getStart(), requestBundle.getEnd());
 
         return viewTwo.getViewTwoData();
-    }
+    }*/
 
 }
 

@@ -14,9 +14,12 @@ class ViewOneBundle {
     private long surveillanceEnd;
     private String mode;
 
-    public ViewOneBundle() {
-        this.surveillanceStart = new TimeNumber(TimeRange.LOWER_RANGE.getRange() , TimeRange.UPPER_RANGE.getRange()).getTimeNumber();
-        this.surveillanceEnd = new TimeNumber(this.surveillanceStart, TimeRange.UPPER_RANGE.getRange()).getTimeNumber();
+    public ViewOneBundle(long surveillanceStart, long surveillanceEnd) {
+//        this.surveillanceStart = new TimeNumber(TimeRange.LOWER_RANGE.getRange() , TimeRange.UPPER_RANGE.getRange()).getTimeNumber();
+//        this.surveillanceEnd = new TimeNumber(this.surveillanceStart, TimeRange.UPPER_RANGE.getRange()).getTimeNumber();
+
+        this.surveillanceStart = surveillanceStart;
+        this.surveillanceEnd = surveillanceEnd;
 
         Random rand = new Random();
 
@@ -27,7 +30,7 @@ class ViewOneBundle {
             this.surveillanceNumber = new MobileNumber().getMobileNumber();
         }
         else {
-            this.surveillanceNumber = -1;
+            this.surveillanceNumber = 0;
             this.mode = "recording";
         }
     }
@@ -81,8 +84,8 @@ public class ViewOne {
         this.viewOneData = viewOneData;
     }
 
-    public void insertInList() {
-        this.viewOneData.add(new ViewOneBundle());
+    public void insertInList(long surveillanceStart, long surveillanceEnd) {
+        this.viewOneData.add(new ViewOneBundle(surveillanceStart, surveillanceEnd));
     }
 }
 
